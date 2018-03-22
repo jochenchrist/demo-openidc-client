@@ -1,0 +1,25 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          myrealm:
+            client-id: demo-openidc-client
+            client-secret: 29b0f0ab-7ed1-45ca-b6e9-74ff278ef38e
+            client-name: demo app
+            provider: keycloak
+            scope: user email
+            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code
+        provider:
+          keycloak:
+            token-uri: http://localhost:18080/auth/realms/myrealm/protocol/openid-connect/token
+            authorization-uri: http://localhost:18080/auth/realms/myrealm/protocol/openid-connect/auth
+            user-info-uri: http://localhost:18080/auth/realms/myrealm/protocol/openid-connect/userinfo
+            jwk-set-uri: http://localhost:18080/auth/realms/myrealm/protocol/openid-connect/certs
+            user-name-attribute: email
+
+logging:
+  level:
+    sun.net.www.protocol.http.HttpURLConnection: TRACE
+    org.springframework.security: DEBUG
